@@ -6,6 +6,7 @@ from flask_autoindex import AutoIndex
 from werkzeug.utils import redirect, secure_filename
 from zipfile import ZipFile
 from os.path import basename
+from config import configs
 
 
 ppath = 'shared'
@@ -21,7 +22,7 @@ idx = AutoIndex(app, browse_root=ppath, add_url_rules=False)
 def login():
     password = request.form.get("password")
     print(password, type(password))
-    if password == "1234":
+    if password == configs["password"]:
         session["logged_in"] = True
         return redirect(url_for('autoindex'))
     else:
@@ -78,4 +79,4 @@ def downloadFile(path):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=configs["port"])
