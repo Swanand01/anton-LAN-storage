@@ -26,6 +26,12 @@ To setup the file server, navigate to \anton-LAN-storage\anton\, and run
 python setup.py
 ```
 This will download and install the necessary dependencies.
+
+## Configuration
+
+The config.py contains configurations like password and the port on which the server will run.
+Default password is admin and default port is 5000.
+
 ## Usage
 
 To run the server, navigate to \anton-LAN-storage\anton, and run
