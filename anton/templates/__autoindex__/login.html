@@ -1,6 +1,19 @@
-<h1 class="centered margin-y">Login</h1>
+{% from "__autoindex__/macros.html" import entry, thead, breadcrumb
+with context %}
+<html>
+    <head>
+        <title>Login Page</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='autoindex.css') }}" >
+    </head>
+    <body >
+        <div class="login_body">
+        <h1 class="centered margin-y">Login</h1>
+        <form class="centered margin-y" method="POST">
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="submit" value="Submit" />
+        </form>
+        </div>
+        
+    </body>
+</html>
 
-<form class="centered margin-y" method="POST">
-    <input type="password" name="password" placeholder="Password" required />
-    <input type="submit" value="Submit" />
-</form>

@@ -185,3 +185,10 @@ address {
 }
 
 .w3-input{padding:8px;display:block;border:none;border-bottom:1px solid rgb(0, 0, 0);}
+
+.login_body{
+  display: block;
+  background-color: #333;
+  align-items: center;
+  align-content: center;
+}
