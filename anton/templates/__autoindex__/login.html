@@ -5,13 +5,19 @@ with context %}
         <title>Login Page</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='autoindex.css') }}" >
     </head>
-    <body >
-        <div class="login_body">
-        <h1 class="centered margin-y">Login</h1>
-        <form class="centered margin-y" method="POST">
-            <input type="password" name="password" placeholder="Password" required />
-            <input type="submit" value="Submit" />
-        </form>
+    <body class="main">
+        <div class="wrapper">
+        <div id="formContent">
+        <h1 class="">Login</h1>
+        <br>
+        <form>
+            <input type="password" id="password" class="fadeIn first" name="login" placeholder="Type Password">
+            <br>
+            <br>
+            <input type="submit" class="fadeIn second login_button" value="Submit">
+          </form>
+       
+        </div>
         </div>
         
     </body>
