@@ -1,5 +1,3 @@
-{% from "__autoindex__/macros.html" import entry, thead, breadcrumb
-with context %}
 <html>
     <head>
         <title>Login Page</title>
@@ -10,7 +8,7 @@ with context %}
         <div id="formContent">
         <h1 class="">Login</h1>
         <br>
-        <form>
+        <form method="POST">
             <input type="password" id="password" class="fadeIn first" name="password" placeholder="Enter password" required>
             <br>
             <br>
