@@ -27,7 +27,6 @@
   </td>
   <td class="actions">
     {% if ent.name != ".." and ent.name != "." %}
-    <a href="/delete/{{ url_for(endpoint, path=ent.path) }}" style="color: red">Delete</a>
     <a href="/download/{{ url_for(endpoint, path=ent.path) }}" style="color: green">Download</a>
     {% endif %}
   </td>

@@ -46,13 +46,6 @@ def autoindex(path='.'):
         return redirect(url_for('login'))
 
 
-@app.route('/delete/<path:path>')
-def delete(path):
-    file = path.split('/')[1]
-    os.remove(ppath + "\\" + file)
-    return redirect(url_for('autoindex'))
-
-
 @app.route('/zip', methods=['POST'])
 def zip():
     name = request.form.get('zipname')
