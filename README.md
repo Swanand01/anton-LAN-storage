@@ -77,4 +77,4 @@ Please adhere to this project's `code of conduct`.
 
 ![Alt Text](https://github.com/Swanand01/anton-LAN-storage/blob/master/demo/demo_gif.gif)
 
-  
+Thanks!
