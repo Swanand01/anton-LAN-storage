@@ -1,80 +1,64 @@
+# Anton LAN Storage
 
-# Anton-LAN-Storage
+Anton LAN Storage is a minimal, self-hosted file manager for your local network.
 
-An easy to use utility to share files on a local network.
+Upload, download, and organize files and folders from any device on the same LAN — all through a simple web UI.
 
-It supports the download of files and directories, the upload of multiple files at once, and deletions.
+![Screenshot](https://your-screenshot-url-if-any)
 
-The user can also upload an existing directory as a .zip file. 
+---
 
-
-## Prerequisites
-
- - [Python](https://www.python.org/downloads/)
- 
-  ## Prerequisites
-
- - [Flask](https://pypi.org/project/Flask/)
- - [Flask-AutoIndex](https://pypi.org/project/Flask-AutoIndex/)
- - [Jinja2](https://pypi.org/project/Jinja2/)
-  
-## Installation
-
-To setup the file server, navigate to \anton-LAN-storage\anton\, and run 
-
-```
-python setup.py
-```
-This will download and install the necessary dependencies.
-
-## Configuration
-
-The config.py contains configurations like password and the port on which the server will run.
-Default password is admin and default port is 5000.
-
-## Usage
-
-To run the server, navigate to \anton-LAN-storage\anton, and run
-
-```
-python app.py
-```
-This will start the server at the local IP address of your machine. 
-The server IP will also be visible in the command window that opens.
 ## Features
 
-- Hassle free, one line setup and running
-- Cross platform
+- 📁 Upload / download / delete files
+- 🗂️ Create folders
+- 🎨 Clean, mobile-friendly Tailwind UI
+- 🔐 Login auth (via `.env`)
+- 📦 Easy setup with Python or Docker
 
-  
-## Contributing
+---
 
-Contributions are always welcome!
+## Requirements
 
-See `contributing.md` for ways to get started.
+- Python 3.8+ **or** Docker
 
-Please adhere to this project's `code of conduct`.
+---
 
-  
+## Option 1: Run with Python
+
+```bash
+git clone https://github.com/Swanand01/anton-LAN-storage.git
+
+cp .env.example .env  # Optional: configure credentials
+python run.py
+```
+
+## Option 2: Run with Docker Compose
+
+```bash
+docker-compose up
+```
+
+App runs at: http://localhost:8000
+
+## Default Login
+
+By default, login is required.
+
+Set your credentials in .env:
+
+```env
+AUTH_USERNAME=admin
+AUTH_PASSWORD=secret
+SECRET_KEY=randomsecretkey
+```
+
+For security, the app will not start without `AUTH_USERNAME` and `AUTH_PASSWORD`.
+
 ## Tech Stack
 
-**Client:** HTML, CSS
+- Flask
+- Tailwind CSS
+- Docker (optional)
 
-**Server:** Python, Flask
-
-  
-## Authors
-
-- [@Swanand01](https://github.com/Swanand01)
-
-  
-## Screenshots
-
-![App Screenshot](https://github.com/Swanand01/anton-LAN-storage/blob/master/demo/demo_pic.JPG)
-
-  
-## Demo
-
-![Alt Text](https://github.com/Swanand01/anton-LAN-storage/blob/master/demo/demo_gif.gif)
-
-Thanks!
+[!NOTE] This app is designed for LAN use — **not hardened for internet-facing production**.
