@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Anton LAN Storage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6 px-4">
+<div class="max-w-3xl mx-auto bg-white shadow rounded-md p-6">
+    <!-- Header -->
+    <div class="flex items-center justify-between flex-wrap gap-4 border-b border-gray-200 pb-6">
+        <h1 class="text-2xl font-semibold">Anton LAN Storage</h1>
+        <a href="/logout" class="p-2 border border-gray-300 rounded hover:bg-gray-200 transition" title="Logout">
+            <img src="{{ url_for('static', filename='icons/arrow-left-end-on-rectangle.svg') }}" alt="Logout"
+                 class="size-5">
+        </a>
+    </div>
+
+    <!-- Breadcrumb + Actions -->
+    <div class="flex justify-between items-center my-6 gap-4">
+        <!-- Breadcrumb -->
+        <div class="text-sm flex flex-wrap items-center gap-1">
+            <a href="/" class="text-blue-600 hover:underline">Home</a>
+            {% if current_path %}
+                {% for part in current_path.split('/') %}
+                    {% set path = '/'.join(current_path.split('/')[:loop.index]) %}
+                    <span>&gt;</span>
+                    <a href="/{{ path }}" class="text-blue-600 hover:underline">{{ part }}</a>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-2 items-center">
+            <!-- Upload Form -->
+            <div>
+                <label for="fileInput"
+                       class="cursor-pointer inline-flex items-center gap-2 p-2 border border-gray-300 rounded hover:bg-gray-200 transition">
+                    <img src="{{ url_for('static', filename='icons/arrow-up-tray.svg') }}" alt="Upload file"
+                         class="min-w-5 size-5"/>
+                    <span class="hidden sm:block">Upload file</span>
+                </label>
+                <input type="file" id="fileInput" class="hidden"/>
+                <input type="hidden" id="uploadPath" value="{{ current_path }}"/>
+            </div>
+
+            <!-- Create Folder Button -->
+            <div>
+                <button id="createFolderButton"
+                        class="cursor-pointer inline-flex items-center gap-2 p-2 border border-gray-300 rounded hover:bg-gray-200 transition">
+                    <img src="{{ url_for('static', filename='icons/folder-plus.svg') }}" alt="Create new folder"
+                         class="min-w-5 size-5"/>
+                    <span class="hidden sm:block">New folder</span>
+                </button>
+                <input type="hidden" id="uploadPath" value="{{ current_path }}"/>
+            </div>
+
+            <!-- Sort Selector -->
+            <select id="sortSelect"
+                    class="border border-gray-300 rounded p-2 bg-white hover:bg-gray-200 transition cursor-pointer h-[42px]"
+                    title="Sort by"
+            >
+                <option value="name-asc" {{ 'selected' if current_sort == 'name-asc' }}>A to Z</option>
+                <option value="name-desc" {{ 'selected' if current_sort == 'name-desc' }}>Z to A</option>
+                <option value="date-desc" {{ 'selected' if current_sort == 'date-desc' }}>Newest First</option>
+                <option value="date-asc" {{ 'selected' if current_sort == 'date-asc' }}>Oldest First</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Upload Progress -->
+    <div id="uploadProgressContainer" class="hidden mb-4">
+        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+            <div id="uploadProgressBar" class="bg-blue-500 h-full w-0 transition-all duration-200"></div>
+        </div>
+        <p id="uploadProgressText" class="text-sm text-gray-600 mt-1">Uploading...</p>
+    </div>
+
+    <!-- File/Folder List -->
+    <ul class="divide-y divide-gray-200 border-t border-gray-200">
+        {% for entry in entries %}
+            <li class="py-2 flex justify-between items-center gap-3">
+                <!-- File/Folder Info -->
+                <div class="flex items-center gap-3 min-w-0">
+                    <img src="{{ url_for('static', filename='icons/' + entry.icon) }}" alt="icon"
+                         class="size-5 text-gray-500"/>
+                    {% if entry.is_folder %}
+                        <a href="{{ '/' + (current_path + '/' if current_path else '') + entry.name }}"
+                           class="text-blue-600 hover:underline truncate">{{ entry.name }}/</a>
+                    {% else %}
+                        <div class="flex flex-col min-w-0">
+                            <span class="truncate">{{ entry.name }}</span>
+                            <span class="text-xs text-gray-500">{{ entry.size|filesize }} · {{ entry.mtime|format_datetime }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Actions -->
+                <div class="flex gap-4">
+                    {% if not entry.is_folder %}
+                        <a href="/download/{{ current_path }}{{ entry.name }}"
+                           class="p-2 border border-gray-300 rounded hover:bg-gray-200 transition"
+                           title="Download">
+                            <img src="{{ url_for('static', filename='icons/arrow-down-tray.svg') }}" alt="Download"
+                                 class="min-w-5 size-5"/>
+                        </a>
+                    {% endif %}
+                    <button onclick="deleteFile('{{ current_path }}/{{ entry.name }}')"
+                            class="p-2 border border-gray-300 rounded hover:bg-gray-200 transition"
+                            title="Delete">
+                        <img src="{{ url_for('static', filename='icons/trash.svg') }}" alt="Delete"
+                             class="min-w-5 size-5"/>
+                    </button>
+                </div>
+            </li>
+        {% endfor %}
+        {% if not entries %}
+            <li class="text-gray-500 py-2">Empty folder</li>
+        {% endif %}
+    </ul>
+</div>
+
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

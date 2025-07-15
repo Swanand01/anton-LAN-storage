@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="h-full flex items-center justify-center px-4">
+<form method="POST"
+      class="bg-white w-full max-w-md p-6 sm:p-8 rounded-xl shadow-lg space-y-4">
+    <h2 class="text-xl sm:text-2xl font-semibold text-center">Login to Anton LAN Storage</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <p class="text-red-500 text-sm text-center">{{ messages[0] }}</p>
+        {% endif %}
+    {% endwith %}
+
+    <div>
+        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+        <input id="username"
+               name="username"
+               type="text"
+               required
+               class="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2"/>
+    </div>
+
+    <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <input id="password"
+               name="password"
+               type="password"
+               required
+               class="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2"/>
+    </div>
+
+    <button type="submit" class="w-full border border-gray-300 p-2 rounded-md hover:bg-gray-200 transition">
+        Log in
+    </button>
+</form>
+</body>
+</html>
