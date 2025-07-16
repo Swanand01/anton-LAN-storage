@@ -61,4 +61,5 @@ For security, the app will not start without `AUTH_USERNAME` and `AUTH_PASSWORD`
 - Tailwind CSS
 - Docker (optional)
 
-[!NOTE] This app is designed for LAN use — **not hardened for internet-facing production**.
+> [!NOTE] 
+> This app is designed for LAN use — **not hardened for internet-facing production**.
